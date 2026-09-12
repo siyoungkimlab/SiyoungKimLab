@@ -29,15 +29,15 @@ Boltz-1 and Boltz-2 were tested on all four GPU types. Each prediction used a si
 
 Each bar comprises the two most time-consuming stages: model loading and prediction. The model-loading time is roughly constant, whereas the prediction time scales with protein size or, more precisely, with the number of tokens. Because the MSA is obtained from a server, the time to retrieve it depends heavily on server availability and is not reproducible. It is usually well under 10 seconds per MSA, so it is not a significant bottleneck for prediction.
 
-![Boltz1](/_posts/openMM_Boltz/Boltz1.png)
-![Boltz2](/_posts/openMM_Boltz/Boltz2.png)
+![Boltz1](/assets/blog/openmm-boltz/Boltz1.png)
+![Boltz2](/assets/blog/openmm-boltz/Boltz2.png)
 
 ## openMM
 Three force-field combinations were tested on all four GPU types. The Amber simulations used a non-bonded interaction cutoff of 0.9 nm, and the CHARMM36 simulations used 1.2 nm. Each simulation used a single GPU. Each system consists of a protein chain, water, and ions, and does not include a ligand.
 
-![amber19 + TIP3P](/_posts/openMM_Boltz/amber19_tip3p.png)
-![amber19 + OPC](/_posts/openMM_Boltz/amber19_opc.png)
-![charmm36](/_posts/openMM_Boltz/charmm36.png)
+![amber19 + TIP3P](/assets/blog/openmm-boltz/amber19_tip3p.png)
+![amber19 + OPC](/assets/blog/openmm-boltz/amber19_opc.png)
+![charmm36](/assets/blog/openmm-boltz/charmm36.png)
 
 ## SLURM scripts
 <details>

@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#faf9f5; --panel:#ffffff;
+    --bg:#ffffff; --panel:#ffffff;
     --ink:#1c1b19; --text:#232220; --text2:#5a564d; --text3:#6f6a5f;
     --muted:#9a958a; --accent:#b07a18; --accent-strong:#9a6a14; --line:#e9e5da;
     --sans:'IBM Plex Sans',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
@@ -62,6 +62,10 @@
   .post-body code{font-family:var(--mono);font-size:0.9em;background:#f1ede3;padding:.12em .4em;border-radius:4px}
   .post-body pre{background:#f1ede3;padding:14px 16px;border-radius:8px;overflow:auto;margin:0 0 16px}
   .post-body pre code{background:none;padding:0}
+  .post-body table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:0 0 20px;font-size:15px;line-height:1.45}
+  .post-body th,.post-body td{border:1px solid var(--line);padding:7px 11px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+  .post-body thead th{background:#f1ede3;font-weight:600;color:var(--ink)}
+  .post-body td:first-child{font-weight:500;white-space:nowrap}
 
   .pl-back{display:inline-block;margin-top:30px;font-family:var(--mono);font-size:13px;
     letter-spacing:0.04em;color:var(--accent-strong);text-decoration:none;text-transform:uppercase}
