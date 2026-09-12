@@ -110,13 +110,13 @@ done
 
 # shut down the resource monitors
 kill -s INT $CPU_PID $MEM_PID
-
 ```
 </details>
 
 <details markdown="1">
   <summary>Boltz on A30</summary>
-  
+
+```
 #!/bin/bash
 #SBATCH -J A30_boltz
 #SBATCH -A siyoungk
@@ -184,11 +184,13 @@ done
 
 # shut down the resource monitors
 kill -s INT $CPU_PID $MEM_PID
+```
 </details>
 
 <details markdown="1">
   <summary>Boltz on A100-N</summary>
 
+```
 #!/bin/bash
 #SBATCH -J A100_boltz
 #SBATCH -A siyoungk
@@ -256,11 +258,13 @@ done
 
 # shut down the resource monitors
 kill -s INT $CPU_PID $MEM_PID
+```
 </details>
 
 <details markdown="1">
   <summary>Boltz on A100-G</summary>
 
+```
 #!/bin/bash
 #SBATCH -J A100G_boltz
 #SBATCH -A siyoungk
@@ -328,6 +332,7 @@ done
 
 # shut down the resource monitors
 kill -s INT $CPU_PID $MEM_PID
+```
 </details>
 
 <details markdown="1">
@@ -400,7 +405,6 @@ done
 
 # shut down the resource monitors
 kill -s INT $CPU_PID $MEM_PID
-
 ```
 </details>
 
@@ -658,6 +662,7 @@ kill -s INT $CPU_PID $MEM_PID $GPU_PID
 <details markdown="1">
   <summary>openMM on A100-G</summary>
 
+```
 #!/bin/bash
 #SBATCH -J A100
 #SBATCH -A siyoungk
@@ -735,6 +740,7 @@ done
  
 # shut down the resource monitors
 kill -s INT $CPU_PID $MEM_PID $GPU_PID
+```
 </details>
 
 <details markdown="1">
