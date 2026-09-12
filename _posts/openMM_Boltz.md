@@ -27,7 +27,7 @@ Boltz-1 and Boltz-2 were tested on all four GPU types. Each prediction used a si
 | Ligand PDB | N/A | 5TBM | 5HHW | 4RDD |
 | Ligand SMILES | N/A | S(=O)(=O)(C)c1ccc(Oc2cc(F)cc(C#N)c2)c2CC(F)(F)C(O)c12 | O(CC1OCCCC1)c1cc(-c2cn(C3CC(C[NH+]4CCC4)C3)c3ncnc(N)c23)ccc1 | S(=O)(=O)([O-])C(C(=O)NC(C(=O)[O-])C1SCC(C)=C(C(=O)[O-])N1)c1ccccc1 |
 
-Each bar comprises the two most time-consuming stages: model loading and prediction. The model-loading time is roughly constant, whereas the prediction time scales with protein size — or, more precisely, with the number of tokens. Because the MSA is obtained from a server, the time to retrieve it depends heavily on server availability and is not reproducible. It is usually well under 10 seconds per MSA, so it is not a significant bottleneck for prediction.
+Each bar comprises the two most time-consuming stages: model loading and prediction. The model-loading time is roughly constant, whereas the prediction time scales with protein size or, more precisely, with the number of tokens. Because the MSA is obtained from a server, the time to retrieve it depends heavily on server availability and is not reproducible. It is usually well under 10 seconds per MSA, so it is not a significant bottleneck for prediction.
 
 ![Boltz1](/_posts/openMM_Boltz/Boltz1.png)
 ![Boltz2](/_posts/openMM_Boltz/Boltz2.png)
