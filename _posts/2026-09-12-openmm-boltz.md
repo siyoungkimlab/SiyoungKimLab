@@ -33,7 +33,7 @@ Each bar comprises the two most time-consuming stages: model loading and predict
 ![Boltz2](/assets/blog/openmm-boltz/Boltz2.png)
 
 ## openMM
-Three force-field combinations were tested on all four GPU types. The Amber simulations used a non-bonded interaction cutoff of 0.9 nm, and the CHARMM36 simulations used 1.2 nm. Each simulation used a single GPU. Each system consists of a protein chain, water, and ions, and does not include a ligand.
+Three force-field combinations were tested on all four GPU types. The Amber simulations used a non-bonded interaction cutoff of 0.9 nm, and the CHARMM36 simulations used 1.2 nm. Each simulation used a single GPU. Each system consists of a protein chain, water, and ions, and does not include a ligand. CHARMM simulations are expected to be slower than AMBER simulations because they use a larger non-bonded cutoff distance. Simulations using OPC water are also expected to be slower than those using TIP3P because each OPC water molecule includes a virtual atom.
 
 ![amber19 + TIP3P](/assets/blog/openmm-boltz/amber19_tip3p.png)
 ![amber19 + OPC](/assets/blog/openmm-boltz/amber19_opc.png)
