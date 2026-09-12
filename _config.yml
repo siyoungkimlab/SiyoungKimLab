@@ -1,6 +1,5 @@
 title: Siyoung Kim Lab
-description: Research lab website and blog
+description: Molecular AI for Therapeutics
 url: https://siyoungkimlab.com
-
-# Posts get clean URLs like /blog/welcome-to-the-lab-blog/
 permalink: /blog/:title/
+exclude: [deploy, assets/src]

@@ -5,10 +5,12 @@ description: Notes and updates from the Siyoung Kim Lab.
 ---
 <p class="pl-eyebrow">Journal</p>
 <h1 class="pl-title" style="margin-top:8px">Blog</h1>
-<p class="pl-lede">Notes, updates, and news from the lab — new papers, results, and what the team is thinking about.</p>
 
 <div class="pl-list">
-{% for post in site.posts %}
+{% assign pinned = site.posts | where_exp: "p", "p.order" | sort: "order" %}
+{% assign rest = site.posts | where_exp: "p", "p.order == nil" %}
+{% assign ordered = pinned | concat: rest %}
+{% for post in ordered %}
   <article class="post-item">
     <span class="post-dot"></span>
     <div>
@@ -18,7 +20,7 @@ description: Notes and updates from the Siyoung Kim Lab.
     </div>
   </article>
 {% endfor %}
-{% if site.posts.size == 0 %}
+{% if ordered.size == 0 %}
   <p class="post-excerpt">No posts yet — check back soon.</p>
 {% endif %}
 </div>
