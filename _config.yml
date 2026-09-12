@@ -1,0 +1,6 @@
+title: Siyoung Kim Lab
+description: Research lab website and blog
+url: https://siyoungkimlab.com
+
+# Posts get clean URLs like /blog/welcome-to-the-lab-blog/
+permalink: /blog/:title/

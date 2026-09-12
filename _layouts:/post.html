@@ -1,0 +1,11 @@
+---
+layout: default
+---
+<article>
+  <p class="pl-eyebrow">{{ page.date | date: "%B %-d, %Y" }}</p>
+  <h1 class="pl-title" style="margin-top:10px">{{ page.title }}</h1>
+  <div class="post-body">
+    {{ content }}
+  </div>
+  <a class="pl-back" href="/blog.html">← Back to all posts</a>
+</article>
