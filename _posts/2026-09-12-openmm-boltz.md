@@ -40,7 +40,7 @@ Three force-field combinations were tested on all four GPU types. The Amber simu
 ![charmm36](/assets/blog/openmm-boltz/charmm36.png)
 
 ## SLURM scripts
-<details>
+<details markdown="1">
   <summary>Boltz on A10</summary>
 
 ```
@@ -113,7 +113,7 @@ kill -s INT $CPU_PID $MEM_PID
 ```
 </details>
 
-<details>
+<details markdown="1">
   <summary>Boltz on H100</summary>
   
 ```
@@ -187,7 +187,7 @@ kill -s INT $CPU_PID $MEM_PID
 ```
 </details>
 
-<details>
+<details markdown="1">
   <summary>openMM on A10</summary>
   
 ```
@@ -270,7 +270,7 @@ kill -s INT $CPU_PID $MEM_PID $GPU_PID
 ```
 </details>
 
-<details>
+<details markdown="1">
   <summary>openMM on A30</summary>
   
 ```
@@ -354,7 +354,7 @@ kill -s INT $CPU_PID $MEM_PID $GPU_PID
 ```
 </details>
 
-<details>
+<details markdown="1">
   <summary>openMM on A100-N</summary>
   
 ```
@@ -438,7 +438,7 @@ kill -s INT $CPU_PID $MEM_PID $GPU_PID
 ```
 </details>
 
-<details>
+<details markdown="1">
   <summary>openMM on H100</summary>
   
 ```
