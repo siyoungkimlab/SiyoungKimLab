@@ -62,7 +62,8 @@
   .post-body code{font-family:var(--mono);font-size:0.9em;background:#f1ede3;padding:.12em .4em;border-radius:4px}
   .post-body pre{background:#f1ede3;padding:14px 16px;border-radius:8px;overflow:auto;margin:0 0 16px}
   .post-body pre code{background:none;padding:0}
-  .post-body table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:0 0 20px;font-size:15px;line-height:1.45}
+  .post-body table{width:100%;border-collapse:collapse;margin:0 0 20px;font-size:15px;line-height:1.45}
+  @media (max-width:680px){.post-body table{display:block;overflow-x:auto}}
   .post-body th,.post-body td{border:1px solid var(--line);padding:7px 11px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
   .post-body thead th{background:#f1ede3;font-weight:600;color:var(--ink);white-space:nowrap}
   .post-body td:first-child{font-weight:500;white-space:nowrap}
