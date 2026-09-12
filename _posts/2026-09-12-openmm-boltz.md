@@ -96,7 +96,7 @@ for pdb in 1IRK 1P97 1UBQ 2SHP; do
 
     for model in boltz1 boltz2; do
 
-        boltz predict $pdb.yaml \
+        boltz predict $DATA/$pdb.yaml \
             --model $model \
             --out_dir 00/$pdb/$model \
             --diffusion_samples 5 \
@@ -110,7 +110,224 @@ done
 
 # shut down the resource monitors
 kill -s INT $CPU_PID $MEM_PID
+
 ```
+</details>
+
+<details markdown="1">
+  <summary>Boltz on A30</summary>
+  
+#!/bin/bash
+#SBATCH -J A30_boltz
+#SBATCH -A siyoungk
+#SBATCH -p a30
+#SBATCH -N 1
+#SBATCH -n 1      # one task: boltz starts one process per GPU itself
+#SBATCH -c 8      # all of the node's cores for that task
+#SBATCH --mem=60G
+#SBATCH --constraint=B
+#SBATCH --gres=gpu:1
+#SBATCH -t 4:00:00
+
+# sbatch *.sub
+
+# Each A30-B (24GB) node has
+# 3 × A30 GPUs
+# 24 cores
+
+module load monitor
+module load conda/2026.03
+module load cuda/12.6.0
+conda activate boltz
+
+hostname
+echo "CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
+nvidia-smi -L        # should list exactly one H100
+nproc                # CPUs this job can use; 14 if SLURM pins cores
+
+# track per-code CPU load
+monitor cpu percent --all-cores >cpu-percent.log &
+CPU_PID=$!
+
+# track memory usage
+monitor cpu memory >cpu-memory.log &
+MEM_PID=$!
+
+# track gpu usage
+monitor gpu percent >gpu-percent.log &
+GPU_PID=$!
+
+
+# actual code
+DATA=/depot/siyoungk/data/performance_benchmark/Boltz/dataset/
+
+mkdir -p 00
+
+# Boltz starts its own, so hide the task count from Lightning.
+unset SLURM_NTASKS
+for pdb in 1IRK 1P97 1UBQ 2SHP; do
+    mkdir -p 00/$pdb
+
+    for model in boltz1 boltz2; do
+
+        boltz predict $DATA/$pdb.yaml \
+            --model $model \
+            --out_dir 00/$pdb/$model \
+            --diffusion_samples 5 \
+            --output_format mae \
+            --devices 1 \
+            --preprocessing-threads 1 \
+            --use_potentials --use_msa_server
+
+    done
+done
+
+# shut down the resource monitors
+kill -s INT $CPU_PID $MEM_PID
+</details>
+
+<details markdown="1">
+  <summary>Boltz on A100-N</summary>
+
+#!/bin/bash
+#SBATCH -J A100_boltz
+#SBATCH -A siyoungk
+#SBATCH -p a100-40gb
+#SBATCH --constraint=N
+#SBATCH -N 1
+#SBATCH -n 1      # one task: boltz starts one process per GPU itself
+#SBATCH -c 12     # all of the node's cores for that task
+#SBATCH --mem=240G
+#SBATCH --gres=gpu:1
+#SBATCH -t 4:00:00
+
+# sbatch *.sub
+
+# Each A100-N (40GB) node has
+# 2 × A100 GPUs
+# 128 cores
+
+module load monitor
+module load conda/2026.03
+module load cuda/12.6.0
+conda activate boltz
+
+hostname
+echo "CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
+nvidia-smi -L        # should list exactly one H100
+nproc                # CPUs this job can use; 14 if SLURM pins cores
+
+# track per-code CPU load
+monitor cpu percent --all-cores >cpu-percent.log &
+CPU_PID=$!
+
+# track memory usage
+monitor cpu memory >cpu-memory.log &
+MEM_PID=$!
+
+# track gpu usage
+monitor gpu percent >gpu-percent.log &
+GPU_PID=$!
+
+
+# actual code
+DATA=/depot/siyoungk/data/performance_benchmark/Boltz/dataset/
+
+mkdir -p 00
+
+# Boltz starts its own, so hide the task count from Lightning.
+unset SLURM_NTASKS
+for pdb in 1IRK 1P97 1UBQ 2SHP; do
+    mkdir -p 00/$pdb
+
+    for model in boltz1 boltz2; do
+
+        boltz predict $DATA/$pdb.yaml \
+            --model $model \
+            --out_dir 00/$pdb/$model \
+            --diffusion_samples 5 \
+            --output_format mae \
+            --devices 1 \
+            --preprocessing-threads 1 \
+            --use_potentials --use_msa_server
+
+    done
+done
+
+# shut down the resource monitors
+kill -s INT $CPU_PID $MEM_PID
+</details>
+
+<details markdown="1">
+  <summary>Boltz on A100-G</summary>
+
+#!/bin/bash
+#SBATCH -J A100G_boltz
+#SBATCH -A siyoungk
+#SBATCH -p a100-40gb
+#SBATCH --constraint=G
+#SBATCH -N 1
+#SBATCH -n 1      # one task: boltz starts one process per GPU itself
+#SBATCH -c 64     # all of the node's cores for that task
+#SBATCH --mem=240G
+#SBATCH --gres=gpu:1
+#SBATCH -t 4:00:00
+
+# sbatch *.sub
+
+# Each A100-G (40GB) node has
+# 2 × A100 GPUs
+# 128 cores
+
+module load monitor
+module load conda/2026.03
+module load cuda/12.6.0
+conda activate boltz
+
+hostname
+echo "CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
+nvidia-smi -L        # should list exactly one H100
+nproc                # CPUs this job can use; 14 if SLURM pins cores
+
+# track per-code CPU load
+monitor cpu percent --all-cores >cpu-percent.log &
+CPU_PID=$!
+
+# track memory usage
+monitor cpu memory >cpu-memory.log &
+MEM_PID=$!
+
+# track gpu usage
+monitor gpu percent >gpu-percent.log &
+GPU_PID=$!
+
+
+# actual code
+DATA=/depot/siyoungk/data/performance_benchmark/Boltz/dataset/
+
+mkdir -p 00
+
+# Boltz starts its own, so hide the task count from Lightning.
+unset SLURM_NTASKS
+for pdb in 1IRK 1P97 1UBQ 2SHP; do
+    mkdir -p 00/$pdb
+
+    for model in boltz1 boltz2; do
+
+        boltz predict $DATA/$pdb.yaml \
+            --model $model \
+            --out_dir 00/$pdb/$model \
+            --diffusion_samples 5 \
+            --output_format mae \
+            --devices 1 \
+            --preprocessing-threads 1 \
+            --use_potentials --use_msa_server
+
+    done
+done
+
+# shut down the resource monitors
+kill -s INT $CPU_PID $MEM_PID
 </details>
 
 <details markdown="1">
@@ -436,6 +653,88 @@ done
 # shut down the resource monitors
 kill -s INT $CPU_PID $MEM_PID $GPU_PID
 ```
+</details>
+
+<details markdown="1">
+  <summary>openMM on A100-G</summary>
+
+#!/bin/bash
+#SBATCH -J A100
+#SBATCH -A siyoungk
+#SBATCH -p a100-40gb
+#SBATCH --constraint=G
+#SBATCH -N 1
+#SBATCH -n 1      # one task
+#SBATCH -c 64     # all of the node's cores for that task
+#SBATCH --mem=240G
+#SBATCH --gres=gpu:1
+#SBATCH -t 24:00:00
+
+# sbatch *.sub
+
+# Each A100-G (40GB) node has
+# 2 × A100 GPUs
+# 128 cores
+
+module load monitor
+module load conda/2026.03
+module load cuda/12.6.0
+conda activate ommflow
+
+hostname
+echo "CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
+nvidia-smi -L        # should list exactly one H100
+nproc                # CPUs this job can use; 14 if SLURM pins cores
+
+# track per-code CPU load
+monitor cpu percent --all-cores >cpu-percent.log &
+CPU_PID=$!
+
+# track memory usage
+monitor cpu memory >cpu-memory.log &
+MEM_PID=$!
+
+# track gpu usage
+monitor gpu percent >gpu-percent.log &
+GPU_PID=$!
+
+
+# actual code
+DATA=/depot/siyoungk/data/performance_benchmark/MD/dataset
+
+mkdir -p 00
+
+for pdb in 1IRK 1P97 1UBQ 2SHP; do
+    mkdir -p 00/$pdb
+
+    ommflow $DATA/$pdb.pdb \
+        --workdir 00/$pdb/charmm36 \
+        --proteinff charmm36_2024 \
+        --waterff tip3p \
+        --platform CUDA \
+        --precision mixed \
+        --production-ns 10
+    
+    ommflow $DATA/$pdb.pdb \
+        --workdir 00/$pdb/amber19_tip3p \
+        --proteinff amber19sb \
+        --waterff tip3p \
+        --platform CUDA \
+        --precision mixed \
+        --production-ns 10
+ 
+    ommflow $DATA/$pdb.pdb \
+        --workdir 00/$pdb/amber19_opc \
+        --proteinff amber19sb \
+        --waterff opc \
+        --platform CUDA \
+        --precision mixed \
+        --production-ns 10
+done
+
+ 
+# shut down the resource monitors
+kill -s INT $CPU_PID $MEM_PID $GPU_PID
 </details>
 
 <details markdown="1">
