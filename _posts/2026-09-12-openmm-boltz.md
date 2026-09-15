@@ -409,6 +409,74 @@ kill -s INT $CPU_PID $MEM_PID
 </details>
 
 <details markdown="1">
+ <summary>Boltz on Lilac with 1 A100 GPU </summary>
+
+```
+#!/bin/bash
+#BSUB -J Boltz
+#BSUB -q gpuqueue
+#BSUB -n 16
+#BSUB -R "span[hosts=1]"
+#BSUB -R A100
+#BSUB -R "rusage[mem=2]"  # default
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -W 168:00
+#BSUB -o %J.out
+#BSUB -e %J.err
+#BSUB -L /bin/bash
+
+# bsub < boltz_submit.sub
+
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate boltz
+
+boltz pointprobe input.yaml \
+    --model boltz1 \
+    --diffusion_samples 5 \
+    --output_format mae \
+    --devices 1 \
+    --preprocessing-threads 1 \
+    --use_potentials \
+    --use_msa_server \
+    --no_kernels
+```
+</details>
+
+<details markdown="1">
+  <summary>Boltz on Lilac with 4 A100 GPUs</summary>
+
+```
+#!/bin/bash
+#BSUB -J Boltz
+#BSUB -q gpuqueue
+#BSUB -n 12
+#BSUB -R "span[hosts=1]"
+#BSUB -R A100
+#BSUB -R "rusage[mem=8]"  # 8 GB x n memory (default is 2 GB)
+#BSUB -gpu "num=4:mode=exclusive_process"
+#BSUB -W 168:00
+#BSUB -o %J.out
+#BSUB -e %J.err
+#BSUB -L /bin/bash
+
+# bsub < boltz_submit.sub
+
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate boltz
+
+boltz pointprobe input.yaml \
+    --model boltz1 \
+    --diffusion_samples 5 \
+    --output_format mae \
+    --devices 4 \
+    --preprocessing-threads 1 \
+    --use_potentials \
+    --use_msa_server \
+    --no_kernels
+```
+</details>
+
+<details markdown="1">
   <summary>openMM on A10</summary>
   
 ```
